@@ -1,12 +1,6 @@
-# Core
 streamlit==1.25.0
 openai==0.28.1
 faiss-cpu==1.7.3
 numpy==1.25.2
 huggingface-hub==0.14.1
 python-dotenv==1.0.1
-
-# Build tools
-setuptools==68.2.2
-pip==24.0
-wheel==0.42.0
