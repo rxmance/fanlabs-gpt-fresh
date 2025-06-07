@@ -12,7 +12,7 @@ from utils.search import search_index
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 # Load vector index and metadata
-index, metadata = load_index_and_metadata("fanlabs_vector_index.faiss", "fanlabs_chunk_metadata.json")
+index, metadata = load_index_and_metadata()
 
 # App UI
 st.set_page_config(page_title="FanLabs GPT", layout="wide")

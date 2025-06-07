@@ -15,9 +15,9 @@ metadata = []
 
 # Embed each chunk
 for i, chunk in enumerate(chunks):
-    vector = model.encode(chunk["text"])
+    vector = model.encode(chunk["content"])
     vectors.append(vector)
-    metadata.append({"id": i, "text": chunk["text"]})
+    metadata.append({"id": i, "text": chunk["content"]})
 
 # Convert to FAISS index
 index = faiss.IndexFlatL2(len(vectors[0]))
