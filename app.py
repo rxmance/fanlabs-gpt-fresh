@@ -4,8 +4,9 @@ import os
 import faiss
 import json
 import numpy as np
-from utils.helper import load_index_and_metadata, search_index
+from utils.helper import load_index_and_metadata
 from utils.prompts import build_prompt
+from utils.search import search_index
 
 # ✅ Use environment variable for OpenAI key (not st.secrets)
 openai.api_key = os.environ.get("OPENAI_API_KEY")
