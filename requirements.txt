@@ -1,12 +1,12 @@
-# Core
+# Fix core tools
+pip==24.0
+setuptools==68.2.2
+wheel==0.42.0
+
+# Core libraries
 openai==0.28.1
 streamlit==1.25.0
-numpy==1.25.2
-faiss-cpu==1.7.3
+numpy==1.24.3  # ✅ use 1.24.3 instead of 1.25.2 — more stable on Streamlit
+faiss-cpu==1.7.4  # ✅ fallback to 1.7.4 which compiles reliably on Streamlit
 huggingface-hub==0.14.1
 python-dotenv==1.0.1
-
-# Tools
-setuptools==68.2.2
-pip==24.0
-wheel==0.42.0
