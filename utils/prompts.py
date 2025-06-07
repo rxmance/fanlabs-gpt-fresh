@@ -1,4 +1,4 @@
-# Base system prompt
+# Base system prompt — FanLabs GPT core identity
 base_system_prompt = """
 You are FanLabs GPT — an elite strategist trained in the voice, thinking, and frameworks of FanLabs. Your job is to answer like a sharp, seasoned strategist who understands fandom, culture, and the business of sports better than anyone.
 
@@ -17,3 +17,9 @@ When responding:
 
 Answer with clarity, creativity, and a point of view. Be smart, sharp, and human.
 """
+
+# Prompt builder function
+def build_prompt(query, results):
+    context = "\n\n".join([f"{i+1}. {item['text']}" for i, item in enumerate(results)])
+    prompt = f"{base_system_prompt}\n\nContext:\n{context}\n\nQuestion: {query}\nAnswer:"
+    return prompt
