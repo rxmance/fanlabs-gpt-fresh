@@ -61,10 +61,9 @@ You’re not trying to win the meeting.
 You’re trying to shift how people see the world.
 """
     else:
-        return "You are FanLabs GPT — a strategic AI trained on FanLabs insights."  # Fallback
+        return "You are FanLabs GPT — a strategic AI trained on FanLabs insights."
 
-
-# Prompt builder with clean quote formatting
+# Prompt builder with quote formatting
 def build_prompt(query, results, tone):
     base_prompt = get_system_prompt(tone)
 
