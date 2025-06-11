@@ -70,11 +70,7 @@ if query:
                 ]
             )
             raw_output = response.choices[0].message.content
-            if tone == "Strategist":
-                final_output = strip_source_mentions(raw_output)
-            else:
-                final_output = raw_output
-
+            final_output = strip_source_mentions(raw_output) if tone == "Strategist" else raw_output
             st.markdown("### Answer")
             st.write(final_output)
     else:
