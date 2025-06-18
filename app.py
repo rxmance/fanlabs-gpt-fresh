@@ -29,7 +29,7 @@ client = OpenAI(
 # ✅ Load FAISS index and chunk metadata
 index, metadata = load_index_and_metadata()
 
-# ✅ Function to clean Strategist responses
+# ✅ Function to clean Strategist responses (strip any accidental source mentions)
 def strip_source_mentions(text):
     text = re.sub(r"\(([^)]*(Talk|Deck|Report|Doc)[^)]*)\)", "", text)
     text = re.sub(r"\[([^]]*(Talk|Deck|Report|Doc)[^]]*)\]", "", text)
@@ -51,13 +51,17 @@ tone = st.selectbox(
 )
 
 # ✅ User input
-query = st.text_input("Your question:")
+query = st.text_input("Your question or request:")
 
 # ✅ Process query
 if query:
     results = search_index(query, index, metadata, top_k=5)
+
     if results:
+        # Build the custom prompt
         prompt = build_prompt(query, results, tone)
+
+        # Call the model
         with st.spinner("Generating answer..."):
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
@@ -66,12 +70,20 @@ if query:
                         "role": "system",
                         "content": get_system_prompt(tone)
                     },
-                    {"role": "user", "content": prompt}
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
                 ]
             )
             raw_output = response.choices[0].message.content
+
+            # Clean Strategist output if needed
             final_output = strip_source_mentions(raw_output) if tone == "Strategist" else raw_output
+
+            # Display
             st.markdown("### Answer")
             st.write(final_output)
+
     else:
         st.warning("No relevant context found.")
